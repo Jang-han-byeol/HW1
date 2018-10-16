@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
-This is a help page
-
+<h1>Login Failed</h1>
+<a href="/helloMVC/index.jsp"></a>
 </body>
 </html>
