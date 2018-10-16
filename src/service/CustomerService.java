@@ -9,35 +9,40 @@ import model.Customer;
 
 public class CustomerService {
 
-	private Map<String, Customer> customerMap;
+	private Map<String, Customer> customers;
 	
-	public CustomerService() {
-		customerMap = new HashMap<String, Customer>();
-		
-		addCustomer(new Customer("id001","alice", "alice.hansung.ac.kr"));
-		addCustomer(new Customer("id002","bob", "bob.hansung.ac.kr"));
-		addCustomer(new Customer("id003","charlie", "charlie.hansung.ac.kr"));
-		addCustomer(new Customer("id004","david", "david.hansung.ac.kr"));
-		addCustomer(new Customer("id005","trudy", "trudy.hansung.ac.kr"));
+	private static final CustomerService instance = new CustomerService();
 	
+	private CustomerService() {
+		customers = new HashMap<String, Customer>();
 	}
-
-	private void addCustomer(Customer customer) {
-
-		customerMap.put(customer.getId(), customer);
-	}	
 	
+	public static CustomerService getInstance() {
+		return instance;
+	}
+	
+	public void addCustomer(Customer customer) {
+		customers.put(customer.getId(), customer);
+	}	
+
 	public Customer findCustomer(String id) {
 		if(id != null)
-			return (customerMap.get(id.toLowerCase()));
+			return (customers.get(id.toLowerCase()));
 		else 
 			return null;
 	}
-	
-	public List<Customer> getAllCustomers() {
+		public Customer login(String id,String password) {
+			try {
+					Customer customer = findCustomer(id);
+					if(id !=null && password!= null && customer.getPassword().trim().equals(password))
+						return customer;
+					else
+						return null;
+			} catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 		
-		List<Customer> customerList = new ArrayList<Customer>(customerMap.values());
-		return customerList;
 	}
 }
 
